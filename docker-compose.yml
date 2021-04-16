@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app:
+    container_name: my_app
+    build: ./docker
+    ports:
+      - 8880:80
+    volumes:
+      - ./app/mautic:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/apache/my_app.conf:/etc/apache2/sites-enabled/my_app.conf
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: my_app_app_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+
+        # volumes:
+        #   my_app_symfony:
+        #     external: true
