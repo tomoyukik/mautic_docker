@@ -7,7 +7,7 @@ services:
     ports:
       - 8880:80
     volumes:
-      - ./app/mautic:/var/www/html
+      - ./app/mautic:/var/www/html/mautic
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./docker/apache/my_app.conf:/etc/apache2/sites-enabled/my_app.conf
     depends_on:
