@@ -17,6 +17,6 @@ libwebp-dev \
 libxpm-dev
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-RUN docker-php-ext-install -j$(nproc) gd zip bcmath sockets
+RUN docker-php-ext-install -j$(nproc) gd zip bcmath sockets mysqli pdo_mysql # mysqli と pdo_mysql はどっちかで良さそう
 
 RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php -- --version=1.10.21 && mv /usr/bin/composer.phar /usr/bin/composer
